@@ -66,8 +66,9 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
 
     // Compose dependencies
-    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
-    implementation "androidx.navigation:navigation-compose:2.4.0-alpha08"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-compose:2.4.0-beta01"
+    implementation "androidx.navigation:navigation-compose:2.4.0-alpha09"
+    implementation "androidx.paging:paging-compose:1.0.0-alpha12"
 
     //Compose accompanist
     //https://google.github.io/accompanist/

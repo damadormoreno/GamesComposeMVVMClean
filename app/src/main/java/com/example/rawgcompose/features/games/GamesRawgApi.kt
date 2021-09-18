@@ -9,7 +9,7 @@ import retrofit2.http.Query
 interface GamesRawgApi {
 
     @GET("games")
-    suspend fun getGames(@Query("key") key: String): GamesDto
+    suspend fun getGames(@Query("key") key: String, @Query("page") page: Int): GamesDto
 
     @GET("games/{id}")
     suspend fun getGameDetailById(
