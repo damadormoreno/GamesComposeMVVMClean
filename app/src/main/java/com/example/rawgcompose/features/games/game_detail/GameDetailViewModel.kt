@@ -1,4 +1,4 @@
-package com.example.rawgcompose.features.games
+package com.example.rawgcompose.features.games.game_detail
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel

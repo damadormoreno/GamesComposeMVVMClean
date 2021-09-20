@@ -8,12 +8,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 @Composable
-fun HomeAppBar(title: String, openSearch: () -> Unit, openFilters: () -> Unit) {
+fun HomeAppBar(title: String, searchClick: () -> Unit,
+               filterClick: () -> Unit) {
     TopAppBar(
         title = { Text(text = title) },
         backgroundColor = MaterialTheme.colors.primaryVariant,
         actions = {
-            IconButton(onClick = openSearch) {
+            IconButton(onClick = searchClick) {
                 Icon(
                     imageVector = Icons.Filled.Search,
                     contentDescription = "Search",
@@ -21,7 +22,7 @@ fun HomeAppBar(title: String, openSearch: () -> Unit, openFilters: () -> Unit) {
                 )
             }
 
-            IconButton(onClick = openFilters) {
+            IconButton(onClick = filterClick) {
                 Icon(
                     imageVector = Icons.Filled.FilterList,
                     contentDescription = "Filter",

@@ -1,4 +1,4 @@
-package com.example.rawgcompose.features.games
+package com.example.rawgcompose.features.games.game_list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -25,13 +25,13 @@ data class GameDetailDto(
     @SerializedName("updated")
     val updated: String = "",
     @SerializedName("background_image")
-    val backgroundImage: String = "",
+    val backgroundImage: String? = "",
     @SerializedName("background_image_additional")
-    val backgroundImageAdditional: String = "",
+    val backgroundImageAdditional: String? = "",
     @SerializedName("website")
-    val website: String = "",
+    val website: String? = "",
     @SerializedName("rating")
-    val rating: Double = 0.0,
+    val rating: Double? = 0.0,
     @SerializedName("rating_top")
     val ratingTop: Int = 0,
     @SerializedName("ratings")
@@ -43,7 +43,7 @@ data class GameDetailDto(
     @SerializedName("added_by_status")
     val addedByStatus: AddedByStatus = AddedByStatus(),
     @SerializedName("playtime")
-    val playtime: Int = 0,
+    val playtime: Int? = 0,
     @SerializedName("screenshots_count")
     val screenshotsCount: Int = 0,
     @SerializedName("movies_count")
@@ -103,11 +103,11 @@ data class GameDetailDto(
     @SerializedName("genres")
     val genres: List<Genre> = listOf(),
     @SerializedName("tags")
-    val tags: List<Tag> = listOf(),
+    val tags: List<Tag>? = listOf(),
     @SerializedName("publishers")
     val publishers: List<Publisher> = listOf(),
     @SerializedName("esrb_rating")
-    val esrbRating: EsrbRating = EsrbRating(),
+    val esrbRating: EsrbRating? = EsrbRating(),
     @SerializedName("clip")
     val clip: Any? = Any(),
     @SerializedName("description_raw")
@@ -340,12 +340,12 @@ fun GameDetailDto.toGameDetail(): GameDetail {
         nameOriginal,
         description,
         released,
-        backgroundImage,
-        backgroundImageAdditional,
-        website,
-        rating,
-        playtime,
-        tags.map { it.name },
-        esrbRating.name?:""
+        backgroundImage?:"",
+        backgroundImageAdditional?:"",
+        website?:"",
+        rating?:0.0,
+        playtime?:0,
+        tags?.map { it.name }?: listOf(),
+        esrbRating?.name?:""
     )
 }

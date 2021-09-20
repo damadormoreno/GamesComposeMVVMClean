@@ -1,4 +1,4 @@
-package com.example.rawgcompose.features.games
+package com.example.rawgcompose.features.games.game_list
 
 import com.example.rawgcompose.features.games.models.Games
 

@@ -1,4 +1,4 @@
-package com.example.rawgcompose.features.games
+package com.example.rawgcompose.features.games.game_list
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
@@ -13,12 +13,15 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
+import com.example.rawgcompose.R
 import com.example.rawgcompose.core.navigation.Screen
+import com.example.rawgcompose.features.common_components.HomeAppBar
 import com.example.rawgcompose.features.games.components.GameCardItem
 
 @ExperimentalFoundationApi
@@ -30,30 +33,37 @@ fun GamesScreen(navController: NavController, viewModel: GamesViewModel = hiltVi
     val state = rememberLazyListState()
 
     Box(modifier = Modifier.fillMaxSize()) {
-        LazyVerticalGrid(
-            cells = GridCells.Fixed(2),
-            state = state,
-            // content padding
-            contentPadding = PaddingValues(
-                start = 12.dp,
-                top = 16.dp,
-                end = 12.dp,
-                bottom = 16.dp
-            ),
-            content = {
-                items(uiState.games.size) { index ->
+        Column {
+            HomeAppBar(
+                title = stringResource(id = R.string.app_name),
+                searchClick = { navController.navigate(Screen.GameSearchScreen.route) },
+                filterClick = { }
+            )
+            LazyVerticalGrid(
+                cells = GridCells.Fixed(2),
+                state = state,
+                // content padding
+                contentPadding = PaddingValues(
+                    start = 12.dp,
+                    top = 16.dp,
+                    end = 12.dp,
+                    bottom = 16.dp
+                ),
+                content = {
+                    items(uiState.games.size) { index ->
 
-                    if (uiState.games.lastIndex == index ){
-                        viewModel.getMoreGames()
-                    }
+                        if (uiState.games.lastIndex == index) {
+                            viewModel.getMoreGames()
+                        }
 
-                    GameCardItem(game = uiState.games[index]) {
-                        navController.navigate(Screen.GameDetailScreen.route + "/${it.id}")
+                        GameCardItem(game = uiState.games[index]) {
+                            navController.navigate(Screen.GameDetailScreen.route + "/${it.id}")
+                        }
                     }
                 }
-            }
-        )
+            )
 
+        }
         if (uiState.error.isNotBlank()) {
             Text(
                 text = uiState.error,

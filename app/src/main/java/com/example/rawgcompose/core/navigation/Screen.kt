@@ -11,4 +11,5 @@ sealed class Screen(val route: String, @StringRes val resourceId: Int, val icon:
     object HomeScreen : Screen("home_screen", R.string.home_screen, Icons.Filled.PlayArrow)
     object GameDetailScreen : Screen("game_detail_screen", R.string.game_detail_screen, null)
     object PlatformScreen : Screen("platform_screen", R.string.platform_screen, Icons.Filled.List)
+    object GameSearchScreen : Screen("game_search_screen", R.string.game_search_screen, null)
 }
