@@ -13,6 +13,7 @@ import javax.inject.Inject
 interface GamesRepository {
 
     suspend fun getGames(): Resource<Games>
+    suspend fun getMoreGames(url: String): Resource<Games>
     suspend fun getGameById(gameId: Int): Resource<GameDetail>
 
     class GamesRepositoryImpl @Inject constructor(
@@ -23,6 +24,18 @@ interface GamesRepository {
             return when (networkHandler.isNetworkAvailable()) {
                 true -> return try {
                     val games = (service.getGames(Keys.API_KEY))
+                    Resource.Success(games.toGames())
+                } catch (e: HttpException) {
+                    Resource.Error(e.localizedMessage ?: "Server Error")
+                }
+                false -> Resource.Error("No network Avaliable")
+            }
+        }
+
+        override suspend fun getMoreGames(url: String): Resource<Games> {
+            return when (networkHandler.isNetworkAvailable()) {
+                true -> return try {
+                    val games = (service.getMoreGames(url))
                     Resource.Success(games.toGames())
                 } catch (e: HttpException) {
                     Resource.Error(e.localizedMessage ?: "Server Error")

@@ -1,16 +1,14 @@
 package com.example.rawgcompose.features.games
 
-import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rawgcompose.core.common.Resource
-import com.example.rawgcompose.features.games.models.GameDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -19,8 +17,8 @@ class GameDetailViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
-    private val _state = mutableStateOf(GameDetailState())
-    val state: State<GameDetailState> = _state
+    private val _uiState = MutableStateFlow(GameDetailState())
+    val uiState: StateFlow<GameDetailState> = _uiState
 
     init {
         savedStateHandle.get<String>("gameId")?.let { gameId ->
@@ -32,9 +30,9 @@ class GameDetailViewModel @Inject constructor(
 
         getGameByIdUseCase(gameId).onEach {
             when (it) {
-                is Resource.Loading -> _state.value = GameDetailState(isLoading = true)
-                is Resource.Error -> _state.value = GameDetailState(error = it.message ?: "Error")
-                is Resource.Success -> _state.value = GameDetailState(game = it.data)
+                is Resource.Loading -> _uiState.value = GameDetailState(isLoading = true)
+                is Resource.Error -> _uiState.value = GameDetailState(error = it.message ?: "Error")
+                is Resource.Success -> _uiState.value = GameDetailState(game = it.data)
             }
         }.launchIn(viewModelScope)
 

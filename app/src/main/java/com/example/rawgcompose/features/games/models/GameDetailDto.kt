@@ -327,7 +327,7 @@ data class GameDetailDto(
         @SerializedName("id")
         val id: Int = 0,
         @SerializedName("name")
-        val name: String = "",
+        val name: String? = "",
         @SerializedName("slug")
         val slug: String = ""
     )
@@ -346,6 +346,6 @@ fun GameDetailDto.toGameDetail(): GameDetail {
         rating,
         playtime,
         tags.map { it.name },
-        esrbRating.name
+        esrbRating.name?:""
     )
 }
