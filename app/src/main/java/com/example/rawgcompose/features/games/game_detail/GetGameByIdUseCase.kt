@@ -1,6 +1,7 @@
 package com.example.rawgcompose.features.games.game_detail
 
 import com.example.rawgcompose.core.common.Resource
+import com.example.rawgcompose.core.exception.Failure
 import com.example.rawgcompose.features.games.GamesRepository
 import com.example.rawgcompose.features.games.models.GameDetail
 import kotlinx.coroutines.flow.Flow
@@ -10,7 +11,7 @@ import javax.inject.Inject
 class GetGameByIdUseCase @Inject constructor(
     private val repository: GamesRepository
 ) {
-    operator fun invoke(gameId: Int): Flow<Resource<GameDetail>> = flow {
+    operator fun invoke(gameId: Int): Flow<Resource<Failure, GameDetail>> = flow {
         emit(Resource.Loading())
         emit(repository.getGameById(gameId))
     }

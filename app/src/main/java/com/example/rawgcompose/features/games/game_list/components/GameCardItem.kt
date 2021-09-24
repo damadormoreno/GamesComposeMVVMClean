@@ -1,4 +1,4 @@
-package com.example.rawgcompose.features.games.components
+package com.example.rawgcompose.features.games.game_list.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*

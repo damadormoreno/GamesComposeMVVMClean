@@ -21,8 +21,8 @@ import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import com.example.rawgcompose.R
 import com.example.rawgcompose.core.navigation.Screen
-import com.example.rawgcompose.features.common_components.HomeAppBar
-import com.example.rawgcompose.features.games.components.GameCardItem
+import com.example.rawgcompose.features.games.game_list.components.HomeAppBar
+import com.example.rawgcompose.features.games.game_list.components.GameCardItem
 
 @ExperimentalFoundationApi
 @ExperimentalCoilApi

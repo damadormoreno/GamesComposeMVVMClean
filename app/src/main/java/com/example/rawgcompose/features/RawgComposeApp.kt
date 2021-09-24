@@ -8,17 +8,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import coil.annotation.ExperimentalCoilApi
-import com.example.rawgcompose.R
 import com.example.rawgcompose.core.navigation.NavigationHost
 import com.example.rawgcompose.core.navigation.Screen
 import com.example.rawgcompose.core.navigation.components.BottomNavigationBar
-import com.example.rawgcompose.features.common_components.HomeAppBar
 
-@OptIn(ExperimentalComposeUiApi::class)
+
+@ExperimentalComposeUiApi
 @ExperimentalFoundationApi
 @ExperimentalCoilApi
 @Composable

@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rawgcompose.core.common.Resource
+import com.example.rawgcompose.core.exception.Failure
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -30,9 +31,11 @@ class GameDetailViewModel @Inject constructor(
 
         getGameByIdUseCase(gameId).onEach {
             when (it) {
-                is Resource.Loading -> _uiState.value = GameDetailState(isLoading = true)
-                is Resource.Error -> _uiState.value = GameDetailState(error = it.message ?: "Error")
                 is Resource.Success -> _uiState.value = GameDetailState(game = it.data)
+                is Resource.Loading -> _uiState.value = GameDetailState(isLoading = true)
+                //Todo: Distinguir entre distintos errores
+                is Resource.Error -> _uiState.value = GameDetailState(error = "Error")
+
             }
         }.launchIn(viewModelScope)
 

@@ -1,8 +1,8 @@
-package com.example.rawgcompose.features.common_components
+package com.example.rawgcompose.features.games.game_list.components
 
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.FilterList
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
@@ -24,7 +24,7 @@ fun HomeAppBar(title: String, searchClick: () -> Unit,
 
             IconButton(onClick = filterClick) {
                 Icon(
-                    imageVector = Icons.Filled.FilterList,
+                    imageVector = Icons.Filled.Info,
                     contentDescription = "Filter",
                     tint = Color.White
                 )

@@ -1,14 +1,11 @@
 package com.example.rawgcompose.core.di
 
-import android.content.Context
 import com.example.rawgcompose.BuildConfig
 import com.example.rawgcompose.core.common.Constants
-import com.example.rawgcompose.core.platform.NetworkHandler
 import com.example.rawgcompose.features.games.GamesRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,12 +16,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
-/*    @Provides
-    @Singleton
-    fun provideNetworkHandler(context: Context): NetworkHandler {
-        return NetworkHandler(context)
-    }*/
 
     @Provides
     @Singleton
