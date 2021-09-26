@@ -17,6 +17,6 @@ fun PlatformScreen() {
 
 @Preview(showSystemUi = true)
 @Composable
-fun previewPlatformScreen(){
+fun PreviewPlatformScreen(){
     PlatformScreen()
 }

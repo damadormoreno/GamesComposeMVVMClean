@@ -14,10 +14,11 @@ class GamesService @Inject constructor(
     private val gamesApi by lazy { retrofit.create(GamesRawgApi::class.java) }
 
     override fun getGames(key: String): Call<GamesDto> = gamesApi.getGames(key)
-    override suspend fun getMoreGames(url: String): GamesDto = gamesApi.getMoreGames(url)
-    override suspend fun searchGames(key: String, query: String): GameSearchDto = gamesApi.searchGames(key, query)
+    override fun getMoreGames(url: String): Call<GamesDto> = gamesApi.getMoreGames(url)
+    override fun searchGames(key: String, query: String): Call<GameSearchDto> =
+        gamesApi.searchGames(key, query)
 
-    override suspend fun getGameDetailById(gameId: Int, key: String) : GameDetailDto =
+    override fun getGameDetailById(gameId: Int, key: String): Call<GameDetailDto> =
         gamesApi.getGameDetailById(gameId, key)
 
 }

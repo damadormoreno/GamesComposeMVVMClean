@@ -14,9 +14,9 @@ import javax.inject.Inject
 interface GamesRepository {
 
     fun getGames(): Flow<Resource<Failure, Games>>
-    suspend fun searchGames(query: String): Resource<Failure, List<GameSearch>>
-    suspend fun getMoreGames(url: String): Resource<Failure, Games>
-    suspend fun getGameById(gameId: Int): Resource<Failure, GameDetail>
+    fun searchGames(query: String): Flow<Resource<Failure, List<GameSearch>>>
+    fun getMoreGames(url: String): Flow<Resource<Failure, Games>>
+    fun getGameById(gameId: Int): Flow<Resource<Failure, GameDetail>>
 
     class GamesRepositoryImpl @Inject constructor(
         private val service: GamesService,
@@ -33,40 +33,37 @@ interface GamesRepository {
             }
         }
 
-        override suspend fun searchGames(query: String): Resource<Failure, List<GameSearch>> {
-            return when (networkHandler.isNetworkAvailable()) {
-                true -> return try {
-                    Resource.Success(
-                        service.searchGames(key = Keys.API_KEY, query = query).toGameSearchList()
-                    )
-                } catch (e: HttpException) {
-                    Resource.Error(Failure.ServerError(e.code(), e.message()))
+        override fun searchGames(query: String): Flow<Resource<Failure, List<GameSearch>>> {
+            return flow {
+                when (networkHandler.isNetworkAvailable()) {
+                    true -> emit(request(service.searchGames(key = Keys.API_KEY, query = query), {
+                        it.toGameSearchList()
+                    }, GameSearchDto()))
+                    false -> emit(Resource.Error(Failure.NetworkConnection(errorMessage = "No Network")))
                 }
-                false -> Resource.Error(Failure.NetworkConnection(errorMessage = "No Network"))
             }
         }
 
-        override suspend fun getMoreGames(url: String): Resource<Failure, Games> {
-            return when (networkHandler.isNetworkAvailable()) {
-                true -> return try {
-                    val games = (service.getMoreGames(url))
-                    Resource.Success(games.toGames())
-                } catch (e: HttpException) {
-                    Resource.Error(Failure.ServerError(e.code(), e.message()))
+        override fun getMoreGames(url: String): Flow<Resource<Failure, Games>> {
+
+            return flow {
+                when (networkHandler.isNetworkAvailable()) {
+                    true -> emit(request(service.getMoreGames(url), {
+                        it.toGames()
+                    }, GamesDto()))
+                    false -> emit(Resource.Error(Failure.NetworkConnection(errorMessage = "No Network")))
                 }
-                false -> Resource.Error(Failure.NetworkConnection(errorMessage = "No Network"))
             }
         }
 
-        override suspend fun getGameById(gameId: Int): Resource<Failure, GameDetail> {
-            return when (networkHandler.isNetworkAvailable()) {
-                true -> return try {
-                    Resource.Success(service.getGameDetailById(gameId, Keys.API_KEY).toGameDetail())
-                } catch (e: HttpException) {
-                    Resource.Error(Failure.ServerError(e.code(), e.message()))
+        override fun getGameById(gameId: Int): Flow<Resource<Failure, GameDetail>> {
+            return flow {
+                when (networkHandler.isNetworkAvailable()) {
+                    true -> emit(request(service.getGameDetailById(gameId, Keys.API_KEY), {
+                        it.toGameDetail()
+                    }, GameDetailDto()))
+                    false -> emit(Resource.Error(Failure.NetworkConnection(errorMessage = "No Network")))
                 }
-
-                false -> Resource.Error(Failure.NetworkConnection(errorMessage = "No Network"))
             }
         }
 

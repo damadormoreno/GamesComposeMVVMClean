@@ -15,17 +15,17 @@ interface GamesRawgApi {
     fun getGames(@Query("key") key: String): Call<GamesDto>
 
     @GET
-    suspend fun getMoreGames(@Url url: String): GamesDto
+    fun getMoreGames(@Url url: String): Call<GamesDto>
 
     @GET("games?parent_platforms=1,2,3&search_precise=false&search_exact=false")
-    suspend fun searchGames(
+    fun searchGames(
         @Query("key") key: String,
         @Query("search") query: String,
-    ): GameSearchDto
+    ): Call<GameSearchDto>
 
     @GET("games/{id}")
-    suspend fun getGameDetailById(
+    fun getGameDetailById(
         @Path("id") gameId: Int,
         @Query("key") key: String
-    ): GameDetailDto
+    ): Call<GameDetailDto>
 }

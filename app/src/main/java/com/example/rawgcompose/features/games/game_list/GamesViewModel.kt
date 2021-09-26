@@ -38,10 +38,10 @@ class GamesViewModel @Inject constructor(
     }
 
     fun getMoreGames() {
-        getMoreGamesUseCase(_uiState.value.next).onEach {
+        getMoreGamesUseCase(Params(_uiState.value.next)).onEach {
             when (it) {
                 is Resource.Error -> {
-                    _uiState.value = GamesState(error = "Error")
+                    handleFailure(it.error)
                 }
                 is Resource.Loading -> {
                 }
