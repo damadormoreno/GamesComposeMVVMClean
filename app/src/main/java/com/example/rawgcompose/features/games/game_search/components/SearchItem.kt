@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.example.rawgcompose.features.games.models.GameSearch
 import com.example.rawgcompose.R
-import com.example.rawgcompose.core.theme.Gray500
+import com.example.rawgcompose.core.theme.ui.Gray500
 
 @Composable
 fun SearchItem(searchResult: GameSearch, onSearchResultClicked: (Int) -> Unit) {

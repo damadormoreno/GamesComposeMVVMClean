@@ -11,30 +11,29 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.rawgcompose.core.navigation.Screen
 import com.example.rawgcompose.features.games.game_search.components.SearchBar
 import com.example.rawgcompose.features.games.game_search.components.SearchResults
 
-@ExperimentalComposeUiApi
 @Composable
 fun GameSearchScreen(
     gameSearchViewModel: GameSearchViewModel = hiltViewModel(),
     navController: NavHostController
 ) {
-    val keyboardController = LocalSoftwareKeyboardController.current
+    //val keyboardController = LocalSoftwareKeyboardController.current
     val uiState by gameSearchViewModel.uiState.collectAsState()
+    val focusManager = LocalFocusManager.current
 
     DisposableEffect(true) {
         onDispose {
-            keyboardController?.hide()
+            //keyboardController?.hide()
+            focusManager.clearFocus()
         }
     }
 
@@ -44,7 +43,7 @@ fun GameSearchScreen(
 
     Column(modifier = Modifier.fillMaxSize()) {
         SearchBar(
-            keyboardController = keyboardController,
+            focusManager = focusManager,
             onSearch = { query -> onSearch(query) },
             navHostController = navController
         )

@@ -22,7 +22,7 @@ class GameSearchViewModel @Inject constructor(
         searchGamesUseCase(query = query).onEach {
             when(it) {
                 is Resource.Loading -> _uiState.value = GameSearchState(isLoading = true)
-                is Resource.Error -> _uiState.value = GameSearchState(error = it.message ?: "Error")
+                is Resource.Error -> _uiState.value = GameSearchState(error = "Error")
                 is Resource.Success -> _uiState.value = GameSearchState(games = it.data?: emptyList())
             }
         }.launchIn(viewModelScope)

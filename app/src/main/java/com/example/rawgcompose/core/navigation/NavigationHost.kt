@@ -1,8 +1,6 @@
 package com.example.rawgcompose.core.navigation
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -12,9 +10,7 @@ import com.example.rawgcompose.features.games.game_list.GamesScreen
 import com.example.rawgcompose.features.games.game_search.GameSearchScreen
 import com.example.rawgcompose.features.platform.PlatformScreen
 
-@ExperimentalComposeUiApi
 @ExperimentalCoilApi
-@ExperimentalFoundationApi
 @Composable
 fun NavigationHost(navController: NavHostController) {
     NavHost(

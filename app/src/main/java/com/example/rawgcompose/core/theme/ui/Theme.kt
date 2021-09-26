@@ -1,4 +1,4 @@
-package com.example.rawgcompose.core.theme
+package com.example.rawgcompose.core.theme.ui
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme

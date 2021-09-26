@@ -1,9 +1,7 @@
 package com.example.rawgcompose.features.games.game_list
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
@@ -21,10 +19,10 @@ import androidx.navigation.NavController
 import coil.annotation.ExperimentalCoilApi
 import com.example.rawgcompose.R
 import com.example.rawgcompose.core.navigation.Screen
-import com.example.rawgcompose.features.games.game_list.components.HomeAppBar
 import com.example.rawgcompose.features.games.game_list.components.GameCardItem
+import com.example.rawgcompose.features.games.game_list.components.HomeAppBar
 
-@ExperimentalFoundationApi
+
 @ExperimentalCoilApi
 @Composable
 fun GamesScreen(navController: NavController, viewModel: GamesViewModel = hiltViewModel()) {
@@ -39,10 +37,8 @@ fun GamesScreen(navController: NavController, viewModel: GamesViewModel = hiltVi
                 searchClick = { navController.navigate(Screen.GameSearchScreen.route) },
                 filterClick = { }
             )
-            LazyVerticalGrid(
-                cells = GridCells.Fixed(2),
+            LazyColumn(
                 state = state,
-                // content padding
                 contentPadding = PaddingValues(
                     start = 12.dp,
                     top = 16.dp,
